@@ -1,3 +1,5 @@
+Requires node.js https://nodejs.org/en/download/
+
 ## How to use:
 
 1. Run `yarn install` or `npm install`
