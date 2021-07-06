@@ -1,5 +1,5 @@
 const ethers = require('ethers');
-const config = require('./config.jsonc');
+const config = require('./config.json');
 
 const addresses = {
 WBNB: "0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c",
