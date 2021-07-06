@@ -8,11 +8,13 @@ Requires node.js https://nodejs.org/en/download/
 1. Get rich
 
 ### config.json values:
+
 ```jsonc
 {
-    "bnbAmount": ".01", // Amount of BNB to spend
-    "tokenAddress": "", // Add token address to snipe
-    "walletAddress": "", // Add your BEP20 public address
-    "mnemonic": "" // Add your private mnemonic seed phrase
+  "bnbAmount": ".01", // Amount of BNB to spend
+  "gasGwei": "10",
+  "tokenAddress": "", // Token address to snipe
+  "walletAddress": "", // Your BEP20 public address
+  "mnemonic": "" // Your wallet private mnemonic seed phrase
 }
 ```

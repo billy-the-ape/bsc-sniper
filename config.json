@@ -1,6 +1,7 @@
 {
-    "bnbAmount": ".01",
-    "tokenAddress": "",
-    "walletAddress": "",
-    "mnemonic": ""
+  "bnbAmount": ".01",
+  "gasGwei": "10",
+  "tokenAddress": "",
+  "walletAddress": "",
+  "mnemonic": ""
 }
