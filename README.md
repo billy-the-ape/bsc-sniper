@@ -12,7 +12,7 @@ Requires node.js https://nodejs.org/en/download/
 ```jsonc
 {
   "bnbAmount": ".01", // Amount of BNB to spend
-  "gasGwei": "10",
+  "gasGwei": "10", // Gas price
   "tokenAddress": "", // Token address to snipe
   "walletAddress": "", // Your BEP20 public address
   "mnemonic": "" // Your wallet private mnemonic seed phrase
