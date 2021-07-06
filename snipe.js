@@ -4,10 +4,10 @@ const config = require('./config.jsonc');
 const addresses = {
 WBNB: "0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c",
 router: "0x10ed43c718714eb63d5aa57b78b54704e256024e",
-target: config.walletAddress // Change this to your address ELSE YOU GONNA SEND YOUR BEANS TO ME
+target: config.walletAddress
 }
 
-const BNBAmount = ethers.utils.parseEther('0.1').toHexString();
+const BNBAmount = ethers.utils.parseEther(config.bnbAmount).toHexString();
 const gasPrice = ethers.utils.parseUnits('10', 'gwei');
 const gas = {
   gasPrice: gasPrice,
