@@ -1,0 +1,5 @@
+{
+    "tokenAddress": "", // Add token address to snipe
+    "walletAddress": "", // Add your BEP20 public address
+    "mnemonic": "" // Add your private mnemonic seed phrase
+}
