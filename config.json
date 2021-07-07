@@ -3,5 +3,6 @@
   "gasGwei": "10",
   "tokenAddress": "",
   "walletAddress": "",
-  "mnemonic": ""
+  "mnemonic": "",
+  "ankrWebsocketUrl": ""
 }
