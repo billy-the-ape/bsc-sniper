@@ -1,12 +1,5 @@
 import { Contract, providers, utils, Wallet } from 'ethers';
-import {
-  mnemonic,
-  routerAddress,
-  websocketUrl,
-  bnbAmount,
-  gasGwei,
-  gasLimit,
-} from './config.json';
+import { bnbAmount, gasGwei, gasLimit, token, mnemonic } from './config.json';
 
 export const fetchChar = async () => {
   process.stdin.setRawMode(true);
@@ -18,7 +11,18 @@ export const fetchChar = async () => {
   );
 };
 
-export const getRouter = () => {
+export type TokenConfig = {
+  wbnbAddress: string;
+  routerAddress: string;
+  websocketUrl: string;
+  scanUrl: string;
+};
+
+export const getTokenConfig = async (token: string): Promise<TokenConfig> => {
+  return await import(`./config.${token}.json`);
+};
+
+export const getRouter = ({ websocketUrl, routerAddress }: TokenConfig) => {
   const provider = new providers.WebSocketProvider(websocketUrl);
   const wallet = Wallet.fromMnemonic(mnemonic);
   const account = wallet.connect(provider);

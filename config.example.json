@@ -1,0 +1,9 @@
+{
+  "bnbAmount": ".01",
+  "gasGwei": "10",
+  "gasLimit": 300000,
+  "token": "bnb",
+  "tokenAddress": "",
+  "walletAddress": "",
+  "mnemonic": ""
+}

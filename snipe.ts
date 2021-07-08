@@ -1,16 +1,26 @@
-import { walletAddress, tokenAddress, wbnbAddress, txUrl } from './config.json';
-import { fetchChar, getPayment, getRouter } from './util';
+import { walletAddress, tokenAddress, token } from './config.json';
+import {
+  fetchChar,
+  getPayment,
+  getRouter,
+  getTokenConfig,
+  TokenConfig,
+} from './util';
+import { Contract } from 'ethers';
 
 process.stdin.setEncoding('utf-8');
 
-const router = getRouter();
 const { bnbAmount, ...payment } = getPayment();
 
-const snipe = async (waitForUser = true) => {
+const snipe = async (
+  router: Contract,
+  { wbnbAddress, scanUrl }: TokenConfig,
+  waitForUser = true
+) => {
   let char = '';
   if (waitForUser) {
     console.log(
-      `Sniper loaded with ${bnbAmount} rounds. Press enter to snipe, or any other key to quit`
+      `Sniper loaded with ${bnbAmount} ${token} rounds. Press enter to snipe, or any other key to quit`
     );
     char = await fetchChar();
   }
@@ -23,27 +33,33 @@ const snipe = async (waitForUser = true) => {
       Math.floor(Date.now() / 1000) + 60 * 10, // 10 minutes from now
       payment
     );
-    console.log(`Swapping BNB for tokens...`);
+    console.log(`Swapping ${token} for tokens...`);
     const receipt = await tx.wait();
-    console.log(`Transaction hash: ${txUrl}${receipt.transactionHash}`);
+    console.log(`Transaction hash: ${scanUrl}/tx/${receipt.transactionHash}`);
     return true;
   } else {
     process.exit(0);
   }
 };
 
-const snipeLooper = async () => {
+const snipeLooper = async (router: Contract, config: TokenConfig) => {
   while (true) {
     try {
-      await snipe();
+      await snipe(router, config);
     } catch (e) {
       console.error(`ERROR: ${e.message}`);
     }
   }
 };
 
-snipeLooper();
+const snipeAsync = async () => {
+  const config = await getTokenConfig(token);
+  const router = getRouter(config);
+  await snipeLooper(router, config);
 
-// TODO: instead of calling snipeLooper(), check for liqudity.  If none, wait for LP transaction and then fire
-// await snipe(false);
-// await snipeLooper();
+  // TODO: instead of calling snipeLooper(), check for liqudity.  If none, wait for LP transaction and then fire
+  // await snipe(false);
+  // await snipeLooper();
+};
+
+snipeAsync();
