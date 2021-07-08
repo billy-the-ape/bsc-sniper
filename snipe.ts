@@ -5,13 +5,10 @@ import {
   mnemonic,
   tokenAddress,
   gasGwei,
+  wbnbAddress,
+  routerAddress,
+  websocketUrl,
 } from './config.json';
-
-const addresses = {
-  WBNB: '0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c',
-  router: '0x10ed43c718714eb63d5aa57b78b54704e256024e',
-  target: walletAddress,
-};
 
 const BNBAmount = utils.parseEther(bnbAmount).toHexString();
 const gasPrice = utils.parseUnits(gasGwei, 'gwei');
@@ -20,9 +17,7 @@ const gas = {
   gasLimit: 300000,
 };
 
-const provider = new providers.WebSocketProvider(
-  'wss://bsc-ws-node.nariox.org:443'
-);
+const provider = new providers.WebSocketProvider(websocketUrl);
 const wallet = Wallet.fromMnemonic(mnemonic);
 const account = wallet.connect(provider);
 
@@ -39,7 +34,7 @@ const getChar = async () => {
 };
 
 const router = new Contract(
-  addresses.router,
+  routerAddress,
   [
     'function swapExactETHForTokens(uint amountOutMin, address[] calldata path, address to, uint deadline) external payable returns (uint[] memory amounts)',
   ],
@@ -55,8 +50,8 @@ const snipe = async () => {
   if (char === '\r') {
     const tx = await router.swapExactETHForTokens(
       0, // Degen ape don't give a fuxk about slippage
-      [addresses.WBNB, tokenAddress],
-      addresses.target,
+      [wbnbAddress, tokenAddress],
+      walletAddress,
       Math.floor(Date.now() / 1000) + 60 * 10, // 10 minutes from now
       {
         ...gas,
