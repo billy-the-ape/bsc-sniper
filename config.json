@@ -1,10 +1,12 @@
 {
   "bnbAmount": ".01",
   "gasGwei": "10",
+  "gasLimit": 300000,
   "tokenAddress": "",
   "walletAddress": "",
   "mnemonic": "",
   "wbnbAddress": "0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c",
   "routerAddress": "0x10ed43c718714eb63d5aa57b78b54704e256024e",
-  "websocketUrl": "wss://bsc-ws-node.nariox.org:443"
+  "websocketUrl": "wss://bsc-ws-node.nariox.org:443",
+  "txUrl": "https://bscscan.com/tx/"
 }
