@@ -9,7 +9,7 @@ Requires node.js https://nodejs.org/en/download/
 
 ### config.json values _YOU MUST ADD THESE_:
 
-Copy `config.transaction empty.json` file in this folder and rename to just `config.transaction.json`. Then fill in the values for your wallet and transaction.
+Copy `config.example.json` file in this folder and rename to just `config.json`. Then fill in the values for your wallet and transaction.
 
 ```jsonc
 {
