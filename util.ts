@@ -16,13 +16,18 @@ export type TokenConfig = {
   routerAddress: string;
   websocketUrl: string;
   scanUrl: string;
+  swapFunction: string;
 };
 
 export const getTokenConfig = async (token: string): Promise<TokenConfig> => {
   return await import(`./config.${token}.json`);
 };
 
-export const getRouter = ({ websocketUrl, routerAddress }: TokenConfig) => {
+export const getRouter = ({
+  websocketUrl,
+  routerAddress,
+  swapFunction,
+}: TokenConfig) => {
   const provider = new providers.WebSocketProvider(websocketUrl);
   const wallet = Wallet.fromMnemonic(mnemonic);
   const account = wallet.connect(provider);
@@ -30,7 +35,7 @@ export const getRouter = ({ websocketUrl, routerAddress }: TokenConfig) => {
   const router = new Contract(
     routerAddress,
     [
-      'function swapExactETHForTokens(uint amountOutMin, address[] calldata path, address to, uint deadline) external payable returns (uint[] memory amounts)',
+      `function ${swapFunction}(uint amountOutMin, address[] calldata path, address to, uint deadline) external payable returns (uint[] memory amounts)`,
     ],
     account
   );

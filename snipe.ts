@@ -14,7 +14,7 @@ const { bnbAmount, ...payment } = getPayment();
 
 const snipe = async (
   router: Contract,
-  { wbnbAddress, scanUrl }: TokenConfig,
+  { wbnbAddress, scanUrl, swapFunction }: TokenConfig,
   waitForUser = true
 ) => {
   let char = '';
@@ -26,7 +26,7 @@ const snipe = async (
   }
 
   if (!waitForUser || char === '\r') {
-    const tx = await router.swapExactETHForTokens(
+    const tx = await router[swapFunction](
       0,
       [wbnbAddress, tokenAddress],
       walletAddress,

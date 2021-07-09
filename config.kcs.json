@@ -1,0 +1,7 @@
+{
+  "wbnbAddress": "0x4446fc4eb47f2f6586f9faab68b3498f86c07521",
+  "routerAddress": "0xc0ffee0000c824d24e0f280f1e4d21152625742b",
+  "websocketUrl": "wss://rpc-ws-mainnet.kcc.network",
+  "scanUrl": "https://explorer.kcc.io/en",
+  "swapFunction": "swapExactKCSForTokens"
+}
