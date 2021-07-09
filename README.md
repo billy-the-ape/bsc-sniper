@@ -25,13 +25,14 @@ Copy `config.transaction empty.json` file in this folder and rename to just `con
 
 ### config.bnb.values _ADVANCED USAGE FOR OTHER ETH FORK BLOCKCHAINS_:
 
-Copy this file and rename to `config.<token>.json`. Then setting the `"token"` property to that value in `config.json` will allow you to snipe a different chain.
+Copy this file and rename to `config.<token>.json`. Then setting the `"tokenConfig"` property to that value in `config.json` will allow you to snipe a different chain.
 
 ```jsonc
 {
   "wbnbAddress": "0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c", // Token address for WBNB. Do not change unless you know what you're doing.
   "routerAddress": "0x10ed43c718714eb63d5aa57b78b54704e256024e", // Router address for PCS. Do not change unless you know what you're doing.
   "websocketUrl": "wss://bsc-ws-node.nariox.org:443", // Url for BSC websocket. Do not change unless you know what you're doing.,
-  "scanUrl": "https://bscscan.com/" // Url for BSCscan for transaction url in terminal
+  "scanUrl": "https://bscscan.com/", // Url for BSCscan for transaction url in terminal
+  "swapFunction": "swapExactETHForTokens" // Function to call to perform the token swap
 }
 ```
