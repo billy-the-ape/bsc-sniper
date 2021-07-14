@@ -91,7 +91,7 @@ export const fetchBuy = async (
   let char = '';
   if (waitForUser) {
     console.log(
-      `Sniper loaded with ${bnbAmount} ${token} rounds. Press enter to fetchBuy, or any other key to quit`
+      `Sniper loaded with ${bnbAmount} ${token} rounds. Press enter to buy, or any other key to quit`
     );
     char = await fetchChar();
   } else {
