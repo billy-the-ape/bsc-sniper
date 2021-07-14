@@ -49,6 +49,7 @@ const bot = async (
   console.log(
     `Sniper loaded with ${bnbAmount} ${token} rounds.  Waiting for pair creation to fire immediately...`
   );
+  while (true) {}
 };
 
 const botAsync = async () => {
@@ -60,4 +61,3 @@ const botAsync = async () => {
 };
 
 botAsync();
-while (true) {}
