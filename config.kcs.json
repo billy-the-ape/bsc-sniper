@@ -3,5 +3,5 @@
   "routerAddress": "0xc0ffee0000c824d24e0f280f1e4d21152625742b",
   "websocketUrl": "wss://rpc-ws-mainnet.kcc.network",
   "scanUrl": "https://explorer.kcc.io/en",
-  "swapFunction": "swapExactKCSForTokens"
+  "buyFunction": "swapExactKCSForTokens"
 }
