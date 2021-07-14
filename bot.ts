@@ -43,6 +43,7 @@ const bot = async (
     );
 
     await fetchBuy(router, config, false);
+    process.exit(0);
   });
 
   console.log(
@@ -59,3 +60,4 @@ const botAsync = async () => {
 };
 
 botAsync();
+while (true) {}
