@@ -13,33 +13,44 @@ const bot = async (
   factory: Contract,
   config: TokenConfig
 ) => {
+  const wbnbAddressLower = String(config.wbnbAddress).toLocaleLowerCase();
+  const tokenAddressLower = String(tokenAddress).toLocaleLowerCase();
   // This will trigger for ALL pair creation on pancakeswap. We have to filter down for just the pair we want.
   // NOTE: This will never fetchBuy if pair is already created!
   factory.on('PairCreated', async (token0, token1, pairAddress) => {
     let tokenIn, tokenOut;
 
-    if (token0 === config.wbnbAddress) {
-      tokenIn = token0;
-      tokenOut = token1;
+    const token0Lower = String(token0).toLocaleLowerCase();
+    const token1Lower = String(token1).toLocaleLowerCase();
+
+    console.log(`
+=================
+New pair detected
+token0: ${token0}
+token1: ${token1}
+pairAddress: ${pairAddress}
+    `);
+
+    if (token0Lower === wbnbAddressLower) {
+      tokenIn = token0Lower;
+      tokenOut = token1Lower;
     }
 
-    if (token1 === config.wbnbAddress) {
-      tokenIn = token1;
-      tokenOut = token0;
+    if (token1Lower === wbnbAddressLower) {
+      tokenIn = token1Lower;
+      tokenOut = token0Lower;
     }
 
-    if (typeof tokenIn === 'undefined') {
-      // wbnb is not part of the pair
-      return;
-    }
-
-    if (tokenOut != tokenAddress) {
-      // token to fetchBuy is not part of the pair
+    if (typeof tokenIn === 'undefined' || tokenOut != tokenAddressLower) {
+      console.log(`
+This is not the pair you're looking for
+=================
+      `);
       return;
     }
 
     console.log(
-      `New pair detected with address ${pairAddress}. Firing at will!`
+      `EXPECTED PAIR FOUND with address ${pairAddress}. Sniping immediately!`
     );
 
     await fetchBuy(router, config, false);
@@ -47,9 +58,8 @@ const bot = async (
   });
 
   console.log(
-    `Sniper loaded with ${bnbAmount} ${token} rounds.  Waiting for pair creation to fire immediately...`
+    `Sniper loaded with ${bnbAmount} ${token} rounds.  Watching for pair creation to fire immediately...`
   );
-  while (true) {}
 };
 
 const botAsync = async () => {
