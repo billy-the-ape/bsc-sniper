@@ -23,13 +23,13 @@ const bot = async (
     const token0Lower = String(token0).toLocaleLowerCase();
     const token1Lower = String(token1).toLocaleLowerCase();
 
-    console.log(`
+    /* console.log(`
 =================
 New pair detected
 token0: ${token0}
 token1: ${token1}
 pairAddress: ${pairAddress}
-    `);
+    `); */
 
     if (token0Lower === wbnbAddressLower) {
       tokenIn = token0Lower;
@@ -42,10 +42,10 @@ pairAddress: ${pairAddress}
     }
 
     if (typeof tokenIn === 'undefined' || tokenOut != tokenAddressLower) {
-      console.log(`
+      /* console.log(`
 This is not the pair you're looking for
 =================
-      `);
+      `); */
       return;
     }
 

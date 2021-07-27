@@ -1,4 +1,5 @@
 import { Contract, providers, utils, Wallet } from 'ethers';
+import readline from 'readline';
 import {
   bnbAmount,
   gasGwei,
@@ -17,6 +18,17 @@ export const fetchChar = async () => {
       resolve(String(data));
     })
   );
+};
+
+const rl = readline.createInterface({
+  input: process.stdin,
+  output: process.stdout,
+});
+
+export const fetchInput = async (question: string) => {
+  return new Promise<string>((resolve) => {
+    rl.question(question, resolve);
+  });
 };
 
 export type TokenConfig = {
@@ -82,6 +94,8 @@ export const getPayment = () => {
   };
 };
 
+let inputTokenAddress: string;
+
 export const fetchBuy = async (
   router: Contract,
   { wbnbAddress, scanUrl, buyFunction }: TokenConfig,
@@ -89,7 +103,15 @@ export const fetchBuy = async (
 ) => {
   const { bnbAmount, ...payment } = getPayment();
   let char = '';
-  if (waitForUser) {
+  inputTokenAddress = inputTokenAddress || tokenAddress;
+  let userInputtedToken = false;
+
+  if (!inputTokenAddress) {
+    inputTokenAddress = await fetchInput('No token contract, paste it here: ');
+    userInputtedToken = true;
+  }
+
+  if (!userInputtedToken && waitForUser) {
     console.log(
       `Sniper loaded with ${bnbAmount} ${token} rounds. Press enter to buy, or any other key to quit`
     );
@@ -98,10 +120,10 @@ export const fetchBuy = async (
     console.log(`Sniper firing with ${bnbAmount} ${token} rounds.`);
   }
 
-  if (!waitForUser || char === '\r') {
+  if (userInputtedToken || !waitForUser || char === '\r') {
     const tx = await router[buyFunction](
       0,
-      [wbnbAddress, tokenAddress],
+      [wbnbAddress, inputTokenAddress],
       walletAddress,
       Math.floor(Date.now() / 1000) + 60 * 10, // 10 minutes from now
       payment
