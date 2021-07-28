@@ -4,5 +4,7 @@
   "factoryAddress": "0xC0fFeE00000e1439651C6aD025ea2A71ED7F3Eab",
   "websocketUrl": "wss://rpc-ws-mainnet.kcc.network",
   "scanUrl": "https://explorer.kcc.io/en",
-  "buyFunction": "swapExactKCSForTokens"
+  "buyFunction": "swapExactKCSForTokens",
+  "chainId": 321,
+  "name": "KCC-MAINNET"
 }

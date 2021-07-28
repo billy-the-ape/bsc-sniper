@@ -38,6 +38,8 @@ export type TokenConfig = {
   websocketUrl: string;
   scanUrl: string;
   buyFunction: string;
+  chainId: number;
+  name: string;
 };
 
 export const getTokenConfig = async (): Promise<TokenConfig> => {
@@ -46,20 +48,23 @@ export const getTokenConfig = async (): Promise<TokenConfig> => {
 
 let _account: Wallet;
 
-export const getAccount = (websocketUrl: string) => {
+export const getAccount = ({ websocketUrl, name, chainId }: TokenConfig) => {
   if (_account) return _account;
 
-  const provider = new providers.WebSocketProvider(websocketUrl);
+  const provider = new providers.WebSocketProvider(websocketUrl, {
+    name,
+    chainId,
+  });
   const wallet = Wallet.fromMnemonic(mnemonic);
   _account = wallet.connect(provider);
 
   return _account;
 };
 
-export const getFactory = ({ websocketUrl, factoryAddress }: TokenConfig) => {
-  const account = getAccount(websocketUrl);
+export const getFactory = (config: TokenConfig) => {
+  const account = getAccount(config);
   return new Contract(
-    factoryAddress,
+    config.factoryAddress,
     [
       'event PairCreated(address indexed token0, address indexed token1, address pair, uint)',
     ],
@@ -67,12 +72,9 @@ export const getFactory = ({ websocketUrl, factoryAddress }: TokenConfig) => {
   );
 };
 
-export const getRouter = ({
-  websocketUrl,
-  routerAddress,
-  buyFunction,
-}: TokenConfig) => {
-  const account = getAccount(websocketUrl);
+export const getRouter = (config: TokenConfig) => {
+  const { routerAddress, buyFunction } = config;
+  const account = getAccount(config);
 
   return new Contract(
     routerAddress,
@@ -137,10 +139,11 @@ export const fetchBuy = async (
   }
 };
 
-export const fetchSell = async (
+/* export const fetchSell = async (
   router: Contract,
   { wbnbAddress, scanUrl, buyFunction }: TokenConfig,
   waitForUser = true
 ) => {
   const { bnbAmount, ...payment } = getPayment();
 };
+ */

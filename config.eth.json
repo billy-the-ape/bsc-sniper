@@ -1,7 +1,10 @@
 {
   "wbnbAddress": "0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c",
   "routerAddress": "0xE592427A0AEce92De3Edee1F18E0157C05861564",
+  "factoryAddress": "???",
   "websocketUrl": "???",
   "scanUrl": "https://etherscan.com",
-  "buyFunction": "swapExactETHForTokens"
+  "buyFunction": "swapExactETHForTokens",
+  "chainId": 1,
+  "name": "Ethereum Mainnet"
 }
