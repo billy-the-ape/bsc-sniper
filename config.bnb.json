@@ -2,7 +2,7 @@
   "wbnbAddress": "0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c",
   "routerAddress": "0x10ed43c718714eb63d5aa57b78b54704e256024e",
   "factoryAddress": "0xcA143Ce32Fe78f1f7019d7d551a6402fC5350c73",
-  "websocketUrl": "wss://apis.ankr.com/wss/36c0d8a82a8749568163c3124435b440/3201543e9ed447de736f0ed85e3c28be/binance/full/main",
+  "websocketUrl": "wss://bsc-ws-node.nariox.org:443",
   "scanUrl": "https://bscscan.com",
   "buyFunction": "swapExactETHForTokens",
   "chainId": 56,
