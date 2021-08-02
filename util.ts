@@ -123,6 +123,7 @@ export const fetchBuy = async (
   }
 
   if (userInputtedToken || !waitForUser || char === '\r') {
+    console.log(`Swapping ${token} for tokens...`);
     const tx = await router[buyFunction](
       0,
       [wbnbAddress, inputTokenAddress],
@@ -130,7 +131,6 @@ export const fetchBuy = async (
       Math.floor(Date.now() / 1000) + 60 * 10, // 10 minutes from now
       payment
     );
-    console.log(`Swapping ${token} for tokens...`);
     const receipt = await tx.wait();
     console.log(`Transaction hash: ${scanUrl}/tx/${receipt.transactionHash}`);
     return true;
