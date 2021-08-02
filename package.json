@@ -11,7 +11,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "ethers": "^5.4.2"
+    "ethers": "^5.4.3"
   },
   "devDependencies": {
     "@types/node": "^16.0.0",
